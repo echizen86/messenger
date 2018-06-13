@@ -5,6 +5,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.messenger.domain.Email;
 import com.messenger.service.EmailService;
 
 @Service
@@ -14,11 +15,11 @@ public class EmailServiceImpl implements EmailService{
 	private  JavaMailSender mailSender;
 
 	@Override
-	public boolean SendEmail(String to, String from, String text) {
+	public boolean SendEmail(Email email) {
 		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setText(text);
-		msg.setFrom(from);
-		msg.setTo(to);
+		msg.setText(email.getText());
+		msg.setFrom(email.getFrom());
+		msg.setTo(email.getTo());
 		
 		mailSender.send(msg);
 		return true;
