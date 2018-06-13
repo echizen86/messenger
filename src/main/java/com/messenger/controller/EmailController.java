@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.messenger.domain.Email;
 import com.messenger.service.EmailService;
 
 @RestController
@@ -14,8 +15,8 @@ public class EmailController {
 	private EmailService emailService;
 	
 	@RequestMapping(path = "/email-send", method = RequestMethod.GET)
-    public boolean sendMail() {
-		return emailService.SendEmail("jose860304@gmail.com", "josecastillo.go@outlook.com", "Test");
+    public boolean sendMail(Email email) {
+		return emailService.SendEmail(email);
 	}
 
 }
