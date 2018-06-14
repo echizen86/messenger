@@ -1,4 +1,4 @@
-package com.messenger.service;
+package com.messenger.services.email.service;
 
 import com.messenger.domain.Email;
 

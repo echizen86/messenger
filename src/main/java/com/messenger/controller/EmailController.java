@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.messenger.domain.Email;
-import com.messenger.service.EmailService;
+import com.messenger.services.email.service.EmailService;
 
 @RestController
 public class EmailController {
