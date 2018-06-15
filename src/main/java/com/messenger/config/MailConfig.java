@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+/// test  upload push
 @Configuration 
 public class MailConfig {
 
