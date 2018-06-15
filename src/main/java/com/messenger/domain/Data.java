@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +28,18 @@ public class Data {
 	
 	@Column(name = "port")
 	private int port;
+	
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public Long getId() {
 		return id;
@@ -71,6 +85,7 @@ public class Data {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + port;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -101,6 +116,11 @@ public class Data {
 			return false;
 		if (port != other.port)
 			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
@@ -116,7 +136,7 @@ public class Data {
 	@Override
 	public String toString() {
 		return "Data [id=" + id + ", host=" + host + ", username=" + username + ", password=" + password + ", port="
-				+ port + "]";
+				+ port + ", user=" + user + "]";
 	}
 
 }
