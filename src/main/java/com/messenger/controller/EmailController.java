@@ -18,5 +18,5 @@ public class EmailController {
     public boolean sendMail(Email email) {
 		return emailService.SendEmail(email);
 	}
-
+// cambio de jose
 }
