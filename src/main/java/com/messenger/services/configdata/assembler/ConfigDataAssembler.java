@@ -1,15 +1,17 @@
 package com.messenger.services.configdata.assembler;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
-
 import com.messenger.domain.ConfigData;
 import com.messenger.services.configdata.dto.ConfigDataDto;
 
-@Mapper
 public interface ConfigDataAssembler {
-
-	ConfigDataAssembler INSTANCE = Mappers.getMapper(ConfigDataAssembler.class);
 	
-	ConfigDataDto ConfigDataToConfigDataDto(ConfigData entity);
+	static public ConfigDataDto toConfigDataDto(ConfigData data) {
+		ConfigDataDto dto = new ConfigDataDto();
+		dto.setId(data.getId());
+		dto .setHost(data.getHost());
+		dto.setPort(data.getPort());
+		
+		return dto;
+	}
+	
 }

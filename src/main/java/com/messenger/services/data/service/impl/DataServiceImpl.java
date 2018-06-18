@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.messenger.controller.request.DataRequest;
 import com.messenger.domain.Data;
+import com.messenger.services.configdata.assembler.ConfigDataAssembler;
 import com.messenger.services.data.assembler.DataAssembler;
 import com.messenger.services.data.dto.DataDto;
 import com.messenger.services.data.repository.DataRepository;
@@ -24,12 +25,12 @@ public class DataServiceImpl implements DataService{
 		data.setPort(data.getPort());
 		data.setUser(dataRequest.getUser());
 		data.setUsername(dataRequest.getUsername());
-		return DataAssembler.INSTANCE.dataToDataDto(dataRepository.save(data));
+		return DataAssembler.toDataDto(dataRepository.save(data));
 	}
 
 	@Override
 	public DataDto getData(Long id) {
-		return DataAssembler.INSTANCE.dataToDataDto(dataRepository.findById(id).get());
+		return DataAssembler.toDataDto(dataRepository.findById(id).get());
 	}
 
 	@Override
@@ -41,7 +42,7 @@ public class DataServiceImpl implements DataService{
 		data.setUser(dataRequest.getUser());
 		data.setUsername(dataRequest.getUsername());
 		data.setId(dataRequest.getId());
-		return DataAssembler.INSTANCE.dataToDataDto(dataRepository.save(data));
+		return DataAssembler.toDataDto(dataRepository.save(data));
 	}
 
 }

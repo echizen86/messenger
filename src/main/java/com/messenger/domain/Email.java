@@ -7,6 +7,16 @@ public class Email {
 	private String to;
 	
 	private String text;
+	
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public String getFrom() {
 		return from;
@@ -34,7 +44,7 @@ public class Email {
 
 	@Override
 	public String toString() {
-		return "Email [from=" + from + ", to=" + to + ", text=" + text + "]";
+		return "Email [from=" + from + ", to=" + to + ", text=" + text + ", user=" + user + "]";
 	}
 
 	@Override
@@ -44,6 +54,7 @@ public class Email {
 		result = prime * result + ((from == null) ? 0 : from.hashCode());
 		result = prime * result + ((text == null) ? 0 : text.hashCode());
 		result = prime * result + ((to == null) ? 0 : to.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -70,6 +81,11 @@ public class Email {
 			if (other.to != null)
 				return false;
 		} else if (!to.equals(other.to))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
