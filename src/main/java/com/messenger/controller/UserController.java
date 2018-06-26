@@ -26,18 +26,18 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.PUT)
-	private UserDto updateUser(@RequestBody UserRequest userRequest) {
+	public UserDto updateUser(@RequestBody UserRequest userRequest) {
 		return userService.updateUser(userRequest);
 	}
 
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-	private UserDto getUser(@PathVariable Integer id) {
+	public UserDto getUser(@PathVariable Integer id) {
 		Long long1 = new Long(id);
 		return userService.getUser(long1);
 	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	private @ResponseBody List<UserDto> getUsers() {
+	public @ResponseBody List<UserDto> getUsers() {
 		return userService.getUsers();
 	}
 

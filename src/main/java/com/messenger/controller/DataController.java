@@ -24,12 +24,12 @@ public class DataController {
 	}
 
 	@RequestMapping(value = "/data", method = RequestMethod.PUT)
-	private DataDto updateUser(@RequestBody DataRequest dataRequest) {
+	public DataDto updateUser(@RequestBody DataRequest dataRequest) {
 		return dataService.updateData(dataRequest);
 	}
 	
 	@RequestMapping(value = "/data/{id}", method = RequestMethod.GET)
-	private DataDto getUser(@PathVariable Integer id) {
+	public DataDto getUser(@PathVariable Integer id) {
 		Long long1 = new Long(id);
 		return dataService.getData(long1);
 	}
