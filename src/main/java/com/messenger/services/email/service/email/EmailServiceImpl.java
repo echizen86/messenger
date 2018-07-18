@@ -20,6 +20,7 @@ public class EmailServiceImpl implements EmailService{
 		msg.setText(email.getText());
 		msg.setFrom(email.getFrom());
 		msg.setTo(email.getTo());
+		msg.setSubject("CM " + email.getUser().getName());
 		
 		mailSender.send(msg);
 		return true;

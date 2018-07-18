@@ -1,16 +1,19 @@
 package com.messenger.services.data.assembler;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
-
 import com.messenger.domain.Data;
 import com.messenger.services.data.dto.DataDto;
 
-@Mapper
 public interface DataAssembler {
 	
-	DataAssembler INSTANCE = Mappers.getMapper(DataAssembler.class);
+	static public DataDto toDataDto(Data data) {
+		DataDto dto = new DataDto();
+		dto.setId(data.getId());
+		dto.setHost(data.getHost());
+		dto.setPort(data.getPort());
+		dto.setUsername(data.getUsername());
+		dto.setPassword(data.getPassword());
+		
+		return dto;
+	}
 	
-	DataDto dataToDataDto(Data entity);
-
 }

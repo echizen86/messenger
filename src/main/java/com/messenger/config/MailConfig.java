@@ -2,14 +2,20 @@ package com.messenger.config;
 
 import java.util.Properties;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import com.messenger.services.data.service.DataService;
+
 /// test  upload push
 @Configuration 
 public class MailConfig {
+	
+	@Autowired
+	private DataService dataService;
 
     @Bean
     public JavaMailSender javaMailService() {
