@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+// Esta clase era para poner la configuracion pero no se si sera necesaria
+
 @Entity
 @Table(name = "config_data")
 public class ConfigData {
