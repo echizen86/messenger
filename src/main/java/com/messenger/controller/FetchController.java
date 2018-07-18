@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.messenger.services.email.dto.EmailDto;
 import com.messenger.services.fetch.service.FetchService;
 
-
 @RestController
 public class FetchController {
 	

@@ -17,12 +17,12 @@ import javax.mail.internet.MimeMultipart;
 import org.springframework.stereotype.Service;
 
 import com.messenger.services.email.dto.EmailDto;
+import com.messenger.services.fetch.service.FetchService;
 import com.sun.mail.imap.IMAPFolder;
 import com.sun.mail.imap.IMAPStore;
 
-
 @Service
-public class FetchServiceImpl {
+public class FetchServiceImpl implements FetchService {
 	private String host = "outlook.office365.com";
 	private Object port = "993";
 	private IMAPStore store;
@@ -80,8 +80,8 @@ public class FetchServiceImpl {
 		if (folder.getUnreadMessageCount() > 0) {
 			for (int i = 0; i < folder.getUnreadMessageCount()/* messages.length */; i++) {
 
-			//	System.out.println("*****************************************************************************");
-			//	System.out.println("MESSAGE " + (i + 1) + ":");
+				// System.out.println("*****************************************************************************");
+				// System.out.println("MESSAGE " + (i + 1) + ":");
 				Message msg = messages[msm--];
 				/*
 				 * System.out.println("Message Number: " + msg.getMessageNumber()); // Object
@@ -107,35 +107,34 @@ public class FetchServiceImpl {
 		}
 		return result;
 	}
-	
+
 	private String getTextFromMessage(Message message) throws MessagingException, IOException {
-	    String result = "";
-	    if (message.isMimeType("text/plain")) {
-	        result = message.getContent().toString();
-	    } else if (message.isMimeType("multipart/*")) {
-	        MimeMultipart mimeMultipart = (MimeMultipart) message.getContent();
-	        result = getTextFromMimeMultipart(mimeMultipart);
-	    }
-	    return result;
+		String result = "";
+		if (message.isMimeType("text/plain")) {
+			result = message.getContent().toString();
+		} else if (message.isMimeType("multipart/*")) {
+			MimeMultipart mimeMultipart = (MimeMultipart) message.getContent();
+			result = getTextFromMimeMultipart(mimeMultipart);
+		}
+		return result;
 	}
 
-	private String getTextFromMimeMultipart(
-	        MimeMultipart mimeMultipart)  throws MessagingException, IOException{
-	    String result = "";
-	    int count = mimeMultipart.getCount();
-	    for (int i = 0; i < count; i++) {
-	        BodyPart bodyPart = mimeMultipart.getBodyPart(i);
-	        if (bodyPart.isMimeType("text/plain")) {
-	            result = result + "\n" + bodyPart.getContent();
-	            break; // without break same text appears twice in my tests
-	        } else if (bodyPart.isMimeType("text/html")) {
-	            String html = (String) bodyPart.getContent();
-	            result = result + "\n" + org.jsoup.Jsoup.parse(html).text();
-	        } else if (bodyPart.getContent() instanceof MimeMultipart){
-	            result = result + getTextFromMimeMultipart((MimeMultipart)bodyPart.getContent());
-	        }
-	    }
-	    return result;
+	private String getTextFromMimeMultipart(MimeMultipart mimeMultipart) throws MessagingException, IOException {
+		String result = "";
+		int count = mimeMultipart.getCount();
+		for (int i = 0; i < count; i++) {
+			BodyPart bodyPart = mimeMultipart.getBodyPart(i);
+			if (bodyPart.isMimeType("text/plain")) {
+				result = result + "\n" + bodyPart.getContent();
+				break; // without break same text appears twice in my tests
+			} else if (bodyPart.isMimeType("text/html")) {
+				String html = (String) bodyPart.getContent();
+				result = result + "\n" + org.jsoup.Jsoup.parse(html).text();
+			} else if (bodyPart.getContent() instanceof MimeMultipart) {
+				result = result + getTextFromMimeMultipart((MimeMultipart) bodyPart.getContent());
+			}
+		}
+		return result;
 	}
 
 }
